@@ -1,0 +1,32 @@
+# - General ignored directories ----
+_pycache_/
+pythontex/
+temp/
+
+# - General ignored Files ----
+./*.pdf
+./*.zip
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.out
+**/*.pgs
+**/*.toc
+**/*.synctex.gz
+
+# - Must not ignore Directories ----
+!./code/
+!./fig/**
+!./tex/**/*.tex
+!**/.vscode/
+
+
+# - Must not ignore Files ----
+!**/*.tex
+!./comm/header.tex
+!./comm/*.bib
+!./main.tex
+!**/README.*
+!**/readme.*
+!./*.code-workspace
+

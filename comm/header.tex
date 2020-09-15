@@ -1,0 +1,279 @@
+% !TeX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -       Instructions        - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% To use this place it in the same directory as `main.tex`
+% 	(the main tex document), as `headers.tex`.
+% Then use a `\include{herders.tex}` statement just before
+% 	the `\begin{document}` statement.
+% Don't forget to change the `\Title{}` parameter to match
+%	or comment it out to use the default in the assignment template.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -     Package Imports       - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{subfiles}           % << Allows for rendering subfiles
+\usepackage{standalone}         % << Allows you to insert tables and plots from "standalone" files
+\usepackage[utf8]{inputenc}     % << Required for inputting international characters.
+\usepackage[T1]{fontenc}        % << Allow for better font encoding in LaTeX
+\usepackage{xcolor}             % << Required to turn URLs the correct colors.
+\usepackage{amsmath}            % << General math tools super useful
+\usepackage{amssymb}            % << Required for using many math symbols.
+\usepackage{gensymb}            % << Allow for generic symbols to be referred to by more readable names and used in both math and text modes.
+\usepackage[english]{babel}     % << Allow for multi-language support in LaTeX documents
+\usepackage{amsthm}             % << Allow for the use of math document sectioning (i.e. theorem, definition, etc)
+\usepackage{hyperref}           % << Allow for hyper links and better reference linking and including URLs 
+\usepackage{float}              % << Allow for better placement of figures tables and other position-able items.
+\usepackage{wrapfig}            % << ALlow for placing figures in line with text with text wrapping
+\usepackage{fancyhdr}           % << Allow for better page headers and footers
+\usepackage{geometry}           % << Allow for editing page geometry
+    \geometry{letterpaper}
+\usepackage{changepage}         % << Allow for adjust width environment
+\usepackage{mathtools}          % << required for vec projections among other things.
+\usepackage{tikz, tikz-3dplot}  % << Allows for the insertion of Check-marks and drawing vector graphics
+\usepackage{pgfplots}           % << Allow for the use of Graphs in document
+    \usepgfplotslibrary{polar}  % << Allow for graphing of polar systems
+    \pgfplotsset{compat=1.16}       % Set up compatibility mode for pgf Plots
+\usepackage{subcaption}         % << Allows for the use for sub-figures to get better multi figure presentation
+\usepackage{graphicx}           % << Allows you to insert images into the document, scale objects among other things
+\usepackage{multicol}           % << Allows you to make tables with many columns intelligently use \begin{multicol} 
+\usepackage{multirow}           % << Allows you to make tables with many rows intelligently use \begin{multirow}
+\usepackage{xfrac}              % << Allows for type set slanted fractions
+% \usepackage[none]{hyphenat}     % << Removes automatic hyphenation (a personal pet peeve of Sam).
+\usepackage{listings,lstautogobble}     % << Allows for displaying code in a formatted way (can't be used with markdown package).
+    \usepackage[mono,extrasp=0em]{inconsolata}  % <<< Allow for a better monospace font in listings and markdown code snipits
+\usepackage{bm}                 % << Required to make vectors bold. 
+
+
+
+% \usepackage[%                 % << Allow for inserting markdown style sintax into LaTeX (can't be used with listings package)
+%     hybrid,html,%
+%     underscores=false,smartEllipses,hashEnumerators,%
+%     footnotes,inlineFootnotes,citations,%
+%     fencedCode,blankBeforeCodeFence,preserveTabs,%
+%     pipeTables,contentBlocks,%
+%     blankBeforeHeading,blankBeforeBlockquote%
+%   ]{markdown}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -     Config Settings       - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Page formatting ------
+    % - Margins ----
+    \geometry{lmargin=.75in,rmargin=.75in, tmargin=.75in, bmargin=0.75in}
+    % - Headers and Footers ----
+    \pagestyle{fancy}
+    \fancyhf{}
+    \renewcommand{\sectionmark}[1]{\markright{\thesection. #1}}
+    \lhead{\fancyplain{}{\rightmark }} 
+    \fancyhead[RE,RO]{Math 2200 HW \hwNum: \hwName}
+    \fancyfoot[LE,RO]{UofU Fall 2020 w/ Prof. Vaibhav Pandey}
+    \fancyfoot[RE,LO]{\yourName (\yourUNum)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - listings Setup for R language
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{lstIdC}{HTML}{236394}
+\definecolor{lstKeyC}{HTML}{0a0a0a}
+\definecolor{lstComC}{HTML}{029727}
+\definecolor{lstStrC}{HTML}{F44336}
+
+\lstset{
+    float=[H],  %
+    xleftmargin=1.5em,  %
+    xrightmargin=.5em,  %
+    breaklines, %
+    breakatwhitespace=true, %
+	columns=fixed,	%
+    postbreak=\space,   %
+    breakindent=1em,    %
+    keywordstyle=\color{lstKeyC}\ttfamily\bfseries\small, %
+    identifierstyle=\color{lstIdC}\ttfamily\bfseries\small,   %
+    basicstyle=\ttfamily\mdseries\small,  %
+    commentstyle=\color{lstComC}\sffamily\bfseries\small, %
+    stringstyle=\color{lstStrC}\ttfamily\slshape\small,   %
+    autogobble=true
+    }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -        Definitions        - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Theorem styles for the new sub theorem environment ----
+    % - may require you to comment out the theorem style section of the main document
+    \newtheoremstyle{exampstyle}
+        {0pt} % Space above
+        {8pt} % Space below
+        {} % Body font
+        {} % Indent amount
+        {\bfseries} % Theorem head font
+        {:} % Punctuation after theorem head
+        {1em} % Space after theorem head
+        {} % Theorem head spec (can be left empty, meaning `normal')
+    \newtheoremstyle{defstyle}
+        {0pt} % Space above
+        {8pt} % Space below
+        {\normal} % Body font
+        {} % Indent amount
+        {} % Theorem head font
+        {{\bfseries :}} % Punctuation after theorem head
+        {1em} % Space after theorem head
+        {{\bfseries\thmname{#1} \thmnumber{#2} }\textit{(\thmnote{#3})}} % Theorem head spec (can be left empty, meaning `normal')
+    \newtheoremstyle{sectstyle}
+        {8pt} % Space above
+        {8pt} % Space below
+        {\Large} % Body font
+        {} % Indent amount
+        {} % Theorem head font
+        {{\bfseries :}} % Punctuation after theorem head
+        {1em} % Space after theorem head
+        {} % Theorem head spec (can be left empty, meaning `normal')
+    \newtheoremstyle{subsectstyle}
+        {8pt} % Space above
+        {8pt} % Space below
+        {\large} % Body font
+        {} % Indent amount
+        {} % Theorem head font
+        {{\bfseries :}} % Punctuation after theorem head
+        {1em} % Space after theorem head
+        {} % Theorem head spec (can be left empty, meaning `normal')
+  \theoremstyle{exampstyle} \newtheorem{exercise}{Exercise}[subsection] 
+  \theoremstyle{defstyle}    \newtheorem{theorem}{Theorem}[subsection]%[exercise]
+  \theoremstyle{exampstyle} \newtheorem{example}[theorem]{Example}
+  \theoremstyle{exampstyle} \newtheorem{remark}[theorem]{Remark}
+  \theoremstyle{defstyle}   \newtheorem{definition}[theorem]{Definition}%[exercise]
+  \theoremstyle{exampstyle} \newtheorem{lemma}[theorem]{Lemma}
+  \theoremstyle{exampstyle} \newtheorem{geometric}{Geometrically}[exercise]
+  \theoremstyle{exampstyle} \newtheorem{idea}[theorem]{Idea}
+  \theoremstyle{exampstyle} \newtheorem{proposition}[theorem]{Proposition}
+  \theoremstyle{exampstyle} \newtheorem{solution}[theorem]{Solution}
+      % - Sub theorems for easy one level nesting with number increment ----
+      \theoremstyle{exampstyle} \newtheorem{subexercise}{Exercise}[exercise]
+      \theoremstyle{defstyle}   \newtheorem{subtheorem}{Theorem}[theorem]
+      \theoremstyle{exampstyle} \newtheorem{subexample}[subtheorem]{Example}
+      \theoremstyle{exampstyle} \newtheorem{subremark}[subtheorem]{Remark}
+      \theoremstyle{defstyle}   \newtheorem{subdefinition}{Definition}[theorem]
+      \theoremstyle{exampstyle} \newtheorem{sublemma}[subtheorem]{Lemma}
+      \theoremstyle{exampstyle} \newtheorem{subgeometric}{Geometrically}[theorem]
+      \theoremstyle{exampstyle} \newtheorem{subidea}[subtheorem]{Idea}
+      \theoremstyle{exampstyle} \newtheorem{subproposition}{Proposition}[theorem]
+      \theoremstyle{exampstyle} \newtheorem{subsolution}[subtheorem]{Solution}
+    
+% - Sub theorem/exercise environment ----
+\makeatletter
+\newenvironment{subthm}[1]{%
+	\def\subtheoremcounter{#1}%
+%     \refstepcounter{#1}%        % - I commented this out to make the counting make more sense to me
+	\protected@edef\theparentnumber{\csname the#1\endcsname}%
+	\setcounter{parentnumber}{\value{#1}}%
+	\setcounter{#1}{0}%
+	\expandafter\def\csname the#1\endcsname{\theparentnumber.\alph{#1}}%
+	% ? To keep hyperref happy, update H-counter as well
+	\expandafter\def\csname theH#1\endcsname{thm.\theparentnumber.\alph{#1}}%
+	\unskip\ignorespaces%
+}{%
+	\setcounter{\subtheoremcounter}{\value{parentnumber}}%
+	\ignorespacesafterend%
+}
+\makeatother
+\newcounter{parentnumber}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -       Python Macros       - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Imports for Vector Helper (requires PythonTeX package and `vectorhelpercode.py`)
+% \pythontexcustomc[begin]{py}{import comm.vectorHelper as vh}
+% \pythontexcustomc[begin]{pyc}{import comm.vectorHelper as vh}
+% \pythontexcustomc[begin]{pycode}{import comm.vectorHelper as vh}
+% - Vector Notation Typesetting Commands  (requires PythonTeX package and `vectorHelper.py`)
+% \newcommand{\pointnote}[3][default]{ \py[vh-#1]{vh.getPointNotation(r"#3", r"#2")} }                % - Creates a Point Notation (aka: "(x, y, z, ..., P_n)") with optional Notation (aka: "P:(x, y, z, ..., P_n)")
+% \newcommand{\veccompnote}[2][default]{ \py[vh-#1]{vh.getVectorComponentNotation(r"#2")} } 			% - Creates a vector in bracket Notation (aka: <v_x, v_y, v_z, v_4, ... , v_n>) 
+% \newcommand{\vecstdnote}[2][default]{ \py[vh-#1]{vh.getVectorStdNotation(r"#2"))} } 					% - Creates a vector Standard Notation (aka: i^hat + j^hat + k^hat + <directional unit vector>)
+% \newcommand{\vecmagninote}[2][default]{ \py[vh-#1]{vh.getVectorMagnitudeNotation(r"#2")} } 			% - Creates the calculation expression for the magnitude of a vector
+% \newcommand{\vecdotpnote}[3][default]{ \py[vh-#1]{vh.getVectorDotProductNotation(r"#2", r"#3")} } 	% - Creates the calculation expansion of a dot product
+% \newcommand{\veccrosspnote}[6][default]{ \py[vh-#1]{vh.getVectorCrossProductNotation(r"#2", r"#3", mode=r'#4', vec3=r"#5", angle=r"#6", badCall=True)} } 
+% \newcommand{\vecTveccompnote}[2][default]{ \frac{ \veccompnote[#1]{#2} }{ \vecmagninote[#1]{#2} } } % - Crates a T^vec (Tangent Unit Vector) calculation in Component Notation for the v^vec
+% \newcommand{\vecTvecstdnote}[2][default]{ \frac{ \vecstdnote[#1]{#2} }{ \vecmagninote[#1]{#2} } }   % - Crates a T^vec (Tangent Unit Vector) calculation in Standard Notation for the v^vec
+% \newcommand{\veccurvenote}[3][default]{ \frac{ \vecmagninote[#1]{#2} }{ \vecmagninote[#1]{#3} } }   % - Creates a \kappa (Curvature Scalar Value) Calculation 
+% \newcommand{\vecacelTnote}[2][default]{ \frac{d}{dt}\, \vecmagninote[#1]{#2}}                       % - Creates an a_T^\vec (Magnitude of the Component of Acceleration in the direction of the Tangent Unit Vector) most basic form Calculation Notation
+% \newcommand{\vecacelTdotnote}[3][default]{ \frac{\vecdotpnote[#1]{#3}{#2}}{\vecmagninote[#1]{#2}} } % - Creates an a_T^\vec dot product of v^vec and a^vec form Calculation Notation.
+% \newcommand{\vecacelTsqrtnote}[3][default]{ \sqrt{\,\left(\vecmagninote[#1]{#2}\right)^2-\left( #3\right)^2\,\,} } % - Creates an a_T^\vec Pythagorean identity form Calculation Notation 
+% \newcommand{\vecacelNkappanote}[3][default]{ #2\,\left( \vecmagninote[#1]{#3} \right)^2 }           % - Creates an a_N^\vec (Magnitude of the Component of Acceleration in the direction of the Normal Unit Vector) from curvature Calculation Notation
+% \newcommand{\vecacelNcrossnote}[3][default]{ \frac{\norm{\veccrosspnote[#1]{#2}{#3}{2}{}{}}}{\vecmagninote[#1]{#2}} }   % - Creates an a_N^\vec Cross Product form Calculation Notation
+% \newcommand{\vecacelNsqrtnote}[3][default]{ \sqrt{\,\left(\vecmagninote[#1]{#2}\right)^2-\left( #3\right)^2\,\,} } % - Creates an a_N^\vec Pythagorean identity form Calculation Notation 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -      Notation Macros      - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - General Notation Macros
+\newcommand{\ds}{\displaystyle}     % - used to make \displaystyle more manageable
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}    % - Creates a command to insert a check-mark symbol (requires tikz package) 
+
+% - Better Negative Symbol
+\renewcommand\neg{\,\raisebox{0.125\baselineskip}{\scalebox{1.0}[0.875]{\textbf{-}}}}	% - Used to make a proper negative sign (requires graphicx)
+\newcommand\fneg{\,\scalebox{1.5}[0.875]{\textbf{-}}}									% - Used to make a proper negative sign Adjusted for fractions (requires graphicx) 
+
+% - Vector Notations 
+\newcommand{\primev}{\,\raisebox{0.125\baselineskip}{\scalebox{0.8}[0.875]{$\mathbf{'}$}}}	% - Used to make a prettier prime notation for vectors (requires graphicx)
+\newcommand{\hvec}[1]{\ensuremath{\overset{\rightharpoonup}{\boldsymbol{#1}}}}  		% - Used to make a half arrow vector/harpoon notation
+% \renewcommand{\vec}[1]{ \py[vh-vecNotation]{vh.vecNotation(r"#1")} }	% - Used to over-wright vec with a vec that covers all letters in it's contents (requires PythonTeX package and `vectorhelpercode.py`)
+% \newcommand{\norm}[1]{\left|\!\left| #1 \right|\!\right|}    						% - Used to create a normalization annotation for vectors complex vector expressions
+\newcommand{\norm}[1]{\ensuremath{\big|\!\big|#1\big|\!\big|}}    						% - Used to create a normalization annotation for vectors complex vector expressions
+\newcommand{\normv}[1]{\ensuremath{\left| \vec{#1} \right|}}    					% - Used to create a normalization annotation for vectors
+\newcommand{\vecf}[2][t]{\ensuremath{\vec{#2}(#1)}}                              % - Used to create a Vector Valued Function notation uses (t) by default 
+\newcommand{\normvf}[2][t]{\ensuremath{\left\vert \vecf[#1]{#2} \right\vert}}     % - Used ot create a Normalized/Magnitude notation for a Vector Valued Function  
+
+% - Vector Projection and Scalar Projection notation Commands ----
+\newcommand{\vecprojnote}[3][none]{\ensuremath{\textit{Proj}_{\,\vec{#2}}\vec{#3}}} 	% - Used to make a annotation for vector projections 
+\newcommand{\vecsprojnote}[3][none]{\ensuremath{\textit{Comp}_{\,\vec{#2}}\vec{#3}}}	% - Used to make a annotation for vector Scalar (Comp) projections 
+
+% - Used to make a good sized dot to signify a dot product
+\makeatletter
+\newcommand*\dotp{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+% - Standard Vector Commands 
+\newcommand{\ihat}[1]{\ensuremath{\,#1\,\boldsymbol{\Hat{i}}\,}}   % - Used to easily inert i^hat
+\newcommand{\jhat}[1]{\ensuremath{\,#1\,\boldsymbol{\Hat{j}}\,}}   % - Used to easily inert j^hat
+\newcommand{\khat}[1]{\ensuremath{\,#1\,\boldsymbol{\Hat{k}}\,}}   % - Used to easily inert k^hat
+
+% - Matrix Commands
+\newcommand{\mat}[1]{\ensuremath{\boldsymbol{#1}}}                       % - Create BoldFace Characters for Matrix Notation
+% \renewcommand{\matrix}[1]{\ensuremath{\begin{matrix} #1 \end{matrix}]}  % - Create single line command for the Matrix Environment
+\newcommand{\vecspace}[1]{\ensuremath{\boldsymbol{\mathbb{#1}}}}    % - Create notation for Vector Space Notations using mathbb font styles  
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -        Commands           - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -       SubFile Hacks       - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - define a way to reference the bib in subfiles with printing 
+\def\biblio{\newpage\bibliographystyle{plain}\bibliography{comm/genbib}}
+    % - Insert the following into the main.tex inside the document environment:
+    %       \def\biblio{ }
+\def\subfileSetCounter#1#2{\setcounter{#1}{#2}}
+    % - Insert the following into the main.tex inside the document environment:
+    %       \def\subfileSetCounter#1#2{ }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -    Title Definitions      - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\vspace{-16pt}UofU-Fall2020 Math 2200:\\Discrete Mathematics\\Homework \hwNum: \hwName\vspace{-8pt}}
+\author{\yourName\\ (\yourUNum)}
+\date{\vspace{-6pt}\today\\[24pt]\noindent\rule{\textwidth}{0.4pt}}
+

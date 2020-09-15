@@ -1,0 +1,57 @@
+\documentclass[12pt, oneside]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% - Page settings        
+%%%%%%%%%%%%%%%%%%%%%%%%
+% ! Fill in my Contents
+\def\yourName{<your-name>}          % - Your name to be put on the paper.
+\def\yourUNum{<your-u#>}            % - Your u# to be put on the paper.
+
+
+\def\hwNum{<HW-\#>}                 % - Variable Holding the Assignment Number 
+\def\hwName{<HW-name>}              % - Variable Holding the Assignment Name
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% - Header Inclusion     
+%%%%%%%%%%%%%%%%%%%%%%%%
+\input{comm/header.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% - Package Inclusion    
+%%%%%%%%%%%%%%%%%%%%%%%%
+% ? any assignment specific package inclusions should be made here
+% ? otherwise they should be made in the header and in the original header template
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - Document Contents                
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+    
+    % - Make the Document Title ------------
+    \maketitle
+
+    % - Work with SubFiles --------
+    \def\biblio{ }
+    \def\subfileSetCounter#1#2{ }
+
+    % - Assignment Reference Section ------------
+    % \section*{References}
+    % \subfile{tex/sampleSubFile}
+
+
+    % - Report Sections ----------------
+    
+		% - Section <Ch#><Sec#> ----
+		\input{tex/s<Ch#>-<Sec#>.tex}
+
+
+
+    % - Bilbo Display ----------
+    \bibliographystyle{plain}
+    \bibliography{comm/gen}
+
+\end{document}

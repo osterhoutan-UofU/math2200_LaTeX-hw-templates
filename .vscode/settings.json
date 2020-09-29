@@ -19,170 +19,67 @@
     "python.testing.nosetestsEnabled": false,
 	
 	"latex-workshop.latex.rootFile.useSubFile": true,
-		"latex-workshop.latex.recipes": [
-			// {
-			// 	"name": "multi-file smart build Script",
-			// 	"tools": [
-			// 		"smartBuild-python"
-			// 	]
-			// },
-			{
-				"name": "pdfLatex (default)",
-				"tools": [
-					"pdflatex"
-				]
-			},
-			{
-				"name": "latexmk 🔃",
-				"tools": [
-					"latexmk"
-				]
-			},
-			{
-				"name": "pythontex build",
-				"tools": [
-					"pdflatex",
-					"pythontex",
-					"pdflatex"
-				]
-			},
-			{
-				"name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
-				"tools": [
-					"pdflatex",
-					"bibtex",
-					"pdflatex",
-					"pdflatex"
-				]
-			},
-			{
-				"name": "Standalone -> .SVG + .PNG",
-				"tools": [
-					"stAl_pdflatex",
-					"magConv-svg",
-					"magConv-png-print",
-					"magConv-png-web",
-					"ren-graphics-pdf"
-				]
-			},
-		],
-		"latex-workshop.latex.tools": [
-			// {
-			//     "name": "rename",
-			//     "command": 
-			// },
-			// {
-			// 	name: "smartBuild-python",
-			// 	"command": "python",
-			// 	"args": [
-			// 		"%DOC%",
-
-			// 	]
-			// }
-			{
-				"name": "latexmk",
-				"command": "latexmk",
-				"args": [
-					"-synctex=1",
-					"-interaction=nonstopmode",
-					"-shell-escape",
-					"-file-line-error",
-					"-pdf",
-					"-outdir=%OUTDIR%",
-					"%DOC%"
-				],
-				"env": {}
-			},
-			{
-				"name": "pdflatex",
-				"command": "pdflatex",
-				"args": [
-					"-synctex=1",
-					"-interaction=nonstopmode",
-					"-shell-escape",
-					"-file-line-error",
-					"%DOC%"
-				],
-				"env": {}
-			},
-			{
-				"name": "bibtex",
-				"command": "bibtex",
-				"args": [
-					"%DOCFILE%"
-				],
-				"env": {}
-			},
-			{
-				"name": "pythontex",
-				"command": "pythontex.exe",
-				"args": [
-					"%DOCFILE%"
-				],
-				"env": {}
-			},
-			{
-				"name": "magConv-svg",
-				"command": "magick",
-				"args": [
-					"convert",
-					"%DOCFILE%.pdf",
-					"img-vec_%DOCFILE%.svg"
-				],
-				"env": [
-					"%DIR%/graphics"
-				],
-			},
-			{
-				"name": "magConv-png-print",
-				"command": "magick",
-				"args": [
-					"convert",
-					"%DOCFILE%.pdf",
-					"-density 300",
-					"img-print_%DOCFILE%.png"
-				],
-				"env": [
-					"%DIR%/graphics"
-				]
-			},
-			{
-				"name": "magConv-png-web",
-				"command": "magick",
-				"args": [
-					"convert",
-					"%DOCFILE%.pdf",
-					"-density 72",
-					"img-web_%DOCFILE%.png"
-				],
-				"env": [
-					"%DIR%/graphics"
-				]
-			},
-			{
-				"name": "stAl_pdflatex",
-				"command": "pdflatex",
-				"args": [
-					"-synctex=1",
-					"-interaction=nonstopmode",
-					"-shell-escape",
-					"-file-line-error",
-					"%DOC%"
-				],
-				"env": [
-					"%DIR%/graphics"
-				]
-			},
-			{
-				"name": "ren-graphics-pdf",
-				"command": "Rename-Item",
-				"args": [
-					"%DOCFILE%.pdf",
-					"DOC_%DOCFILE%.pdf"
-				],
-				"env": [
-					"%DIR%/graphics"
-				]
-			},
-		],
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "LuaTeX (default)",
+			"tools": [
+				"lualatex"
+			]
+		},
+		{
+			"name": "LuaTeX ➞ BibTeX ➞ LuaTeX × 2",
+			"tools": [
+				"lualatex",
+				"bibtex",
+				"lualatex",
+				"lualatex"
+			]
+		},
+		{
+			"name": "pdfLatex",
+			"tools": [
+				"pdflatex"
+			]
+		},
+		{
+			"name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+			"tools": [
+				"pdflatex",
+				"bibtex",
+				"pdflatex",
+				"pdflatex"
+			]
+		},
+		{
+			"name": "latexmk 🔃",
+			"tools": [
+				"latexmk",
+				"latexmk"
+			]
+		},
+		{
+			"name": "XeTeX",
+			"tools": [
+				"XeTeX"
+			]
+		},
+		{
+			"name": "XeTeX ➞ BibTeX ➞ XeTeX × 2",
+			"tools": [
+				"xelatex",
+				"bibtex",
+				"xelatex",
+				"xelatex"
+			]
+		},
+		
+		{
+			"name": "pythontex build",
+			"tools": [
+				"pdflatex",
+				"pythontex",
+				"pdflatex"
+			]
+		},
+	],
 }

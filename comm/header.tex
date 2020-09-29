@@ -18,11 +18,13 @@
 \usepackage[utf8]{inputenc}     % << Required for inputting international characters.
 \usepackage[T1]{fontenc}        % << Allow for better font encoding in LaTeX
 \usepackage{xcolor}             % << Required to turn URLs the correct colors.
-\usepackage{amsmath}            % << General math tools super useful
 \usepackage{amssymb}            % << Required for using many math symbols.
+\usepackage{amsmath}            % << General math tools super useful
+\usepackage{amsthm}             % << Allow for the use of math document sectioning (i.e. theorem, definition, etc)
+\usepackage{thmtools}           % << Allow for more control over theorem environment.
+\usepackage{tabto}              % << Allow for putting things in the margins for Thm Environment.
 \usepackage{gensymb}            % << Allow for generic symbols to be referred to by more readable names and used in both math and text modes.
 \usepackage[english]{babel}     % << Allow for multi-language support in LaTeX documents
-\usepackage{amsthm}             % << Allow for the use of math document sectioning (i.e. theorem, definition, etc)
 \usepackage{hyperref}           % << Allow for hyper links and better reference linking and including URLs 
 \usepackage{float}              % << Allow for better placement of figures tables and other position-able items.
 \usepackage{wrapfig}            % << ALlow for placing figures in line with text with text wrapping
@@ -30,7 +32,9 @@
 \usepackage{geometry}           % << Allow for editing page geometry
     \geometry{letterpaper}
 \usepackage{changepage}         % << Allow for adjust width environment
+\usepackage{hanging}            % << Allow for the Hanging Paragraph Environment
 \usepackage{mathtools}          % << required for vec projections among other things.
+\usepackage{cleveref,nameref}   % << Allow for the Use of teh `\cref` and `\nameref` commands to insert smart references.
 \usepackage{tikz, tikz-3dplot}  % << Allows for the insertion of Check-marks and drawing vector graphics
 \usepackage{pgfplots}           % << Allow for the use of Graphs in document
     \usepgfplotslibrary{polar}  % << Allow for graphing of polar systems
@@ -46,7 +50,6 @@
 \usepackage{bm}                 % << Required to make vectors bold. 
 
 
-
 % \usepackage[%                 % << Allow for inserting markdown style sintax into LaTeX (can't be used with listings package)
 %     hybrid,html,%
 %     underscores=false,smartEllipses,hashEnumerators,%
@@ -55,6 +58,8 @@
 %     pipeTables,contentBlocks,%
 %     blankBeforeHeading,blankBeforeBlockquote%
 %   ]{markdown}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,13 +74,15 @@
     \renewcommand{\sectionmark}[1]{\markright{\thesection. #1}}
     \lhead{\fancyplain{}{\rightmark }} 
     \fancyhead[RE,RO]{Math 2200 HW \hwNum: \hwName}
-    \fancyfoot[LE,RO]{UofU Fall 2020 w/ Prof. Vaibhav Pandey}
-    \fancyfoot[RE,LO]{\yourName (\yourUNum)}
+    \fancyfoot[LE,RO]{Prof. Vaibhav Pandey}
+    \fancyfoot[RE,LO]{\yourName}
+    \fancyfoot[CE,CO]{\thepage}
+    % \fancyhead[RE,RO]{\thepage\;
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% - listings Setup for R language
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% - listings Setup for any supported language - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \definecolor{lstIdC}{HTML}{236394}
 \definecolor{lstKeyC}{HTML}{0a0a0a}
 \definecolor{lstComC}{HTML}{029727}
@@ -99,30 +106,30 @@
     }
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% -        Definitions        - %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% -     Theorem Env Definitions     - %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % - Theorem styles for the new sub theorem environment ----
     % - may require you to comment out the theorem style section of the main document
-    \newtheoremstyle{exampstyle}
+    \newtheoremstyle{exampstyle}%
         {0pt} % Space above
         {8pt} % Space below
         {} % Body font
         {} % Indent amount
-        {\bfseries} % Theorem head font
-        {:} % Punctuation after theorem head
+        {} % Theorem head font
+        {} % Punctuation after theorem head
         {1em} % Space after theorem head
-        {} % Theorem head spec (can be left empty, meaning `normal')
-    \newtheoremstyle{defstyle}
+        {{\bfseries\thmname{#1} \thmnumber{#2} \:::}} % Theorem head spec (can be left empty, meaning `normal')
+    \newtheoremstyle{defstyle}%
         {0pt} % Space above
         {8pt} % Space below
-        {\normal} % Body font
+        {} % Body font
         {} % Indent amount
         {} % Theorem head font
-        {{\bfseries :}} % Punctuation after theorem head
+        {} % Punctuation after theorem head
         {1em} % Space after theorem head
-        {{\bfseries\thmname{#1} \thmnumber{#2} }\textit{(\thmnote{#3})}} % Theorem head spec (can be left empty, meaning `normal')
-    \newtheoremstyle{sectstyle}
+        {{\bfseries\thmname{#1} \thmnumber{#2} \::}\textit{\thmnote{#3}}{\bfseries:\:}} % Theorem head spec (can be left empty, meaning `normal')
+    \newtheoremstyle{sectstyle}%
         {8pt} % Space above
         {8pt} % Space below
         {\Large} % Body font
@@ -131,7 +138,7 @@
         {{\bfseries :}} % Punctuation after theorem head
         {1em} % Space after theorem head
         {} % Theorem head spec (can be left empty, meaning `normal')
-    \newtheoremstyle{subsectstyle}
+    \newtheoremstyle{subsectstyle}%
         {8pt} % Space above
         {8pt} % Space below
         {\large} % Body font
@@ -140,31 +147,158 @@
         {{\bfseries :}} % Punctuation after theorem head
         {1em} % Space after theorem head
         {} % Theorem head spec (can be left empty, meaning `normal')
-  \theoremstyle{exampstyle} \newtheorem{exercise}{Exercise}[subsection] 
-  \theoremstyle{defstyle}    \newtheorem{theorem}{Theorem}[subsection]%[exercise]
-  \theoremstyle{exampstyle} \newtheorem{example}[theorem]{Example}
-  \theoremstyle{exampstyle} \newtheorem{remark}[theorem]{Remark}
-  \theoremstyle{defstyle}   \newtheorem{definition}[theorem]{Definition}%[exercise]
-  \theoremstyle{exampstyle} \newtheorem{lemma}[theorem]{Lemma}
-  \theoremstyle{exampstyle} \newtheorem{geometric}{Geometrically}[exercise]
-  \theoremstyle{exampstyle} \newtheorem{idea}[theorem]{Idea}
-  \theoremstyle{exampstyle} \newtheorem{proposition}[theorem]{Proposition}
-  \theoremstyle{exampstyle} \newtheorem{solution}[theorem]{Solution}
-      % - Sub theorems for easy one level nesting with number increment ----
-      \theoremstyle{exampstyle} \newtheorem{subexercise}{Exercise}[exercise]
-      \theoremstyle{defstyle}   \newtheorem{subtheorem}{Theorem}[theorem]
-      \theoremstyle{exampstyle} \newtheorem{subexample}[subtheorem]{Example}
-      \theoremstyle{exampstyle} \newtheorem{subremark}[subtheorem]{Remark}
-      \theoremstyle{defstyle}   \newtheorem{subdefinition}{Definition}[theorem]
-      \theoremstyle{exampstyle} \newtheorem{sublemma}[subtheorem]{Lemma}
-      \theoremstyle{exampstyle} \newtheorem{subgeometric}{Geometrically}[theorem]
-      \theoremstyle{exampstyle} \newtheorem{subidea}[subtheorem]{Idea}
-      \theoremstyle{exampstyle} \newtheorem{subproposition}{Proposition}[theorem]
-      \theoremstyle{exampstyle} \newtheorem{subsolution}[subtheorem]{Solution}
+%   \theoremstyle{exampstyle} \newtheorem{exercise}{Exercise}[subsection] 
+
+
+% - Theorem Definitions --------
+% ? Same as above but with thmtools
+    % - Declare Theorem Styles ------
+    %* Theorem Style for automatically creating the exercise format with the hline after the premise,
+    %*      containing `{::`, `::}` section delimiters, & a `\newpage` after all is said and done. 
+    \declaretheoremstyle[
+            spaceabove=8pt,%
+            spacebelow=8pt,%
+            notebraces={\hspace{0pt}}{\hspace{0pt}},%
+            headpunct={\hspace{0pt}},%
+            headformat={%
+                \hangindent=2em%
+                \textbf{\NAME\, \NUMBER \;\::\textit{\NOTE}:\;}%\,\NOTE\,:}\;%
+            }%,
+            %qed={\hspace{0pt}\\[4pt]\hfil \bfseries{\large ::\}}\newpage}%, 
+        ]{myFullExerStyle}
+    %* Theorem Style that allows you to have a premise on the line with the thm header
+    %*        when using a `thmbox` box w/ out excess formatting.
+    \declaretheoremstyle[
+            spaceabove=8pt,%
+            spacebelow=10pt,%
+            bodyfont={},%
+            headformat={%
+                %\hangindent=1.5em %
+                \textbf{\NAME\, \NUMBER \;:\NOTE:}\;%
+            },%
+            % Must use `thmbox` key with `L`, `M` or `S` values in the `\decalretheorem[]{}` creation to get a box 
+            % qed={\bfseries \ensuremath{\boxdot}}%
+        ]{myThmBoxStyle}
+
+    % - Declare Theorem Environments ------
+    %* Theorem Environment for exercises that should not start on a new page,
+    %*      should not create a new page after, & should not have a "hrule" under the premise.
+    %* This is great for sub-exercises.
+    \newcommand{\ExerStartMk}{\tabto*{0cm}\makebox[-0.0125in][r]{\bfseries\large$\{$::}\tabto*{\TabPrevPos}}
+    \newcommand{\ExerEndMk}{\tabto*{8.5in}\makebox[-1.125in][r]{\bfseries\large::$\}$}\tabto*{\TabPrevPos}}
+    \declaretheorem[
+            parent=subsection,%
+            heading={Exercise},%
+            refname={exer,exercises},%
+            Refname={Exercise,Exercises},%
+            style=exampstyle,%
+            preheadhook={\vspace{-6pt}},%
+            preheadhook={%
+                ~\\[28pt]%
+                % \vspace{14pt}%
+                \ExerStartMk%
+                % {\tabto*{0cm}\makebox[0in][r]{\bfseries$\{$:}\tabto*{\TabPrevPos}}%
+                \vspace{-28pt}%
+                % ~\\[-28pt]%
+            },%
+            % postheadhook={},%
+            prefoothook={%
+                % \vspace{-14pt}%
+                \ExerEndMk%
+                % {\tabto*{8.5in}\makebox[-1.35in][r]{\bfseries:$\}$}\tabto*{\TabPrevPos}}%
+            },%
+            % postfoothook={\vspace{14pt}}%
+        ]{exercise}
+    %* Theorem Environment that is for Exercises that are going to be long enough that 
+    %*      they deserve their own page (aka: it will insert a newpage at the end).
+    %* This should be your primary environment for exercises.
+    \declaretheorem[
+            sharenumber=exercise,%
+            heading={Exercise},%
+            refname={exer,exercises},%
+            Refname={Exercise,Exercises},%
+            style=myFullExerStyle,%
+            postheadhook={\hspace{0pt}},%
+            prefoothook={%
+                % \vspace{-10pt}%
+                % \ExerEndMk%
+            }%,%
+            %postfoothook={\newpage}%
+        ]{myExerciseFull}
+    
+    %* Theorem Environment like `FullExercise`, except it won't do a `\newpage` after it finishes.
+    \declaretheorem[
+            sharenumber=exercise,%
+            heading={Exercise},%
+            refname={exer,exercises},%
+            Refname={Exercise,Exercises},%
+            style=myFullExerStyle,%
+            postheadhook={%
+                \myThmToolsSupStyleValue%
+                \ExerStartMk%
+                \vspace{-14pt}%
+            },%
+            prefoothook={%
+                \vspace{-14pt}%
+                \ExerEndMk%
+            },%
+            postfoothook={%
+                \def\myThmToolsNoteValue{\hspace{0pt}}%
+                \vspace{14pt}%
+            }%
+        ]{myExerciseFull*}
+
+    %* Theorem Environment For Basic Theorems
+    \declaretheorem[%
+        parent=exercise,%
+        heading={Theorem},%
+        refname={thm,theorems},%
+        Refname={Thoerem,Theorems},%
+        style=myThmBoxStyle,%
+        thmbox=M,%
+        preheadhook={\begin{center}\begin{minipage}[c]{\textwidth-1.5em}},%
+        postfoothook={\end{minipage}\end{center}\vspace{14pt}}%
+    ]{theorem}
+
+    %* Theorem Environment For Definitions
+    \declaretheorem[%
+        sharenumber=theorem,%
+        heading={Definition},%
+        refname={def,definitions},%
+        Refname={Definition,Definition},%
+        style=myThmBoxStyle,%
+        thmbox=M,%
+        preheadhook={\begin{center}\begin{minipage}[c]{\textwidth-1.5em}},%
+        postfoothook={\end{minipage}\end{center}\vspace{14pt}}%
+    ]{definition}
+
+    % \theoremstyle{defstyle}   \newtheorem{theorem}{Theorem}[exercise]
+    \theoremstyle{exampstyle} \newtheorem{example}[theorem]{Example}
+    \theoremstyle{exampstyle} \newtheorem{remark}[theorem]{Remark}
+    % \theoremstyle{defstyle}   \newtheorem{definition}[theorem]{Definition}%[exercise]
+    \theoremstyle{exampstyle} \newtheorem{lemma}[theorem]{Lemma}
+    \theoremstyle{exampstyle} \newtheorem{geometric}{Geometrically}[exercise]
+    \theoremstyle{exampstyle} \newtheorem{idea}[theorem]{Idea}
+    \theoremstyle{exampstyle} \newtheorem{proposition}[theorem]{Proposition}
+    \theoremstyle{exampstyle} \newtheorem{solution}[theorem]{Solution}
+        % - Sub theorems for easy one level nesting with number increment ----
+        \theoremstyle{exampstyle} \newtheorem{subexercise}{Exercise}[exercise]
+        \theoremstyle{defstyle}   \newtheorem{subtheorem}{Theorem}[theorem]
+        \theoremstyle{exampstyle} \newtheorem{subexample}[subtheorem]{Example}
+        \theoremstyle{exampstyle} \newtheorem{subremark}[subtheorem]{Remark}
+        \theoremstyle{defstyle}   \newtheorem{subdefinition}{Definition}[theorem]
+        \theoremstyle{exampstyle} \newtheorem{sublemma}[subtheorem]{Lemma}
+        \theoremstyle{exampstyle} \newtheorem{subgeometric}{Geometrically}[theorem]
+        \theoremstyle{exampstyle} \newtheorem{subidea}[subtheorem]{Idea}
+        \theoremstyle{exampstyle} \newtheorem{subproposition}{Proposition}[theorem]
+        \theoremstyle{exampstyle} \newtheorem{subsolution}[subtheorem]{Solution}
+
     
 % - Sub theorem/exercise environment ----
 \makeatletter
 \newenvironment{subthm}[1]{%
+    \renewcommand{\ExerStartMk}{\tabto*{0cm}\makebox[-0.125in][r]{\bfseries$\{$:}\tabto*{\TabPrevPos}}%
+    \renewcommand{\ExerEndMk}{\tabto*{8.5in}\makebox[-1.22in][r]{\bfseries:$\}$}\tabto*{\TabPrevPos}}%
 	\def\subtheoremcounter{#1}%
 %     \refstepcounter{#1}%        % - I commented this out to make the counting make more sense to me
 	\protected@edef\theparentnumber{\csname the#1\endcsname}%
@@ -173,14 +307,54 @@
 	\expandafter\def\csname the#1\endcsname{\theparentnumber.\alph{#1}}%
 	% ? To keep hyperref happy, update H-counter as well
 	\expandafter\def\csname theH#1\endcsname{thm.\theparentnumber.\alph{#1}}%
-	\unskip\ignorespaces%
+    % \unskip
+    \ignorespaces%
+    \vspace{18pt}%
 }{%
-	\setcounter{\subtheoremcounter}{\value{parentnumber}}%
-	\ignorespacesafterend%
+    \setcounter{\subtheoremcounter}{\value{parentnumber}}%
+    \renewcommand{\ExerStartMk}{\tabto*{0cm}\makebox[-0.0125in][r]{\bfseries\large$\{$::}\tabto*{\TabPrevPos}}%
+    \renewcommand{\ExerEndMk}{\tabto*{8.5in}\makebox[-1.125in][r]{\bfseries\large::$\}$}\tabto*{\TabPrevPos}}%
+    \ignorespacesafterend%
+    \vspace{18pt}%
 }
 \makeatother
 \newcounter{parentnumber}
 
+% - Exercise Full Wrapping Environment ----
+\long\def\beginExerciseFull[#1]\premisesection#2\worksection#3{%
+    % \long\def\theExerPremise{#2}%
+    \begin{myExerciseFull}[#1]%\label{exer:\theHexercise}%
+        % \par~\\[-14pt]%
+        $\hphantom{.}$%
+        % \hangindent=1.5em%
+        #2~\\[-18pt]%
+        % \vspace{8pt}%
+        \noindent\rule{\textwidth}{0.4pt}%
+        ~\\[8pt]%
+        % \vspace{-8pt}%
+        % \tabto*{0cm}\makebox[-0.125in][r]{\ExerStartMk}\tabto*{\TabPrevPos}%
+        \ExerStartMk%
+        % \vspace{-14pt}%
+        % \\[-14pt]%
+        % \noindent%
+        % \begin{hangparas}{1.5em}{1}%
+            $\hphantom{.}$%
+            #2%
+            % \ignorespaces%
+            % ~\ExerEndMk%
+        % \end{hangparas}%
+        %~\unskip%
+        %\ignorespacesafterend%\par%
+}
+\long\def\endExerciseFull{%
+        \ignorespaces%
+        ~\\[-28pt]%
+        \ExerEndMk%
+    \end{myExerciseFull}%
+    % \def\theExerPremise{}%
+    \ignorespacesafterend%
+    \newpage%
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -273,7 +447,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -    Title Definitions      - %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{\vspace{-16pt}UofU-Fall2020 Math 2200:\\Discrete Mathematics\\Homework \hwNum: \hwName\vspace{-8pt}}
-\author{\yourName\\ (\yourUNum)}
-\date{\vspace{-6pt}\today\\[24pt]\noindent\rule{\textwidth}{0.4pt}}
+\title{\hwName}
+\author{\yourName}
+\date{\today}
+
+\makeatletter
+\renewcommand{\@maketitle}{%
+    % \vspace{-72pt} 
+    \begin{center}
+        {\large UofU - Fall 2020  - MATH 2200:} \\[2pt]
+        \textit{\Large Discrete Mathematics}
+        \par
+        \vspace{8pt}
+        \Large{Homework \hwNum:} \\[6pt]
+        \textbf{\huge \@title}
+        \par
+        \vspace{8pt}
+        \textbf{\Large \@author} \\[-8pt]
+        {\small (\yourUNum)}
+        \\[-6pt]\noindent\rule{\textwidth}{0.4pt}
+    \end{center}
+    \vspace{-28pt}
+    \begin{flushright}
+        {\large \@date}
+    \end{flushright}
+    \par
+}
+\makeatother
 
